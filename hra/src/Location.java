@@ -30,4 +30,15 @@ public class Location {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "west=" + west +
+                ", north=" + north +
+                ", east=" + east +
+                ", south=" + south +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

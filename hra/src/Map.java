@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,59 +20,47 @@ public class Map {
             int numberOfLocation = 0;
 
             while((line = reader.readLine()) != null){
-                int west = 0;
-                int north = 0;
-                int east = 0;
-                int south = 0;
+                int west = loadDirections(line)[0];
+                int north = loadDirections(line)[1];
+                int east = loadDirections(line)[2];
+                int south = loadDirections(line)[3];
 
-                for (int i = 0; i < 4;i++){
-                    switch (i){
-                        case 0:
-                            west = loadDirections(line)[i];
-                        case 1:
-                            north = loadDirections(line)[i];
-                        case 2:
-                            east = loadDirections(line)[i];
-                        case 3:
-                            south = loadDirections(line)[i];
-                    }
-                }
                 numberOfLocation++;
                 hashMap.put(numberOfLocation, new Location(west, north, east, south, loadName(line)));
+
+                switch (hashMap.get(numberOfLocation).getName()){
+                    case "Forest":
+                        hashMap.get(numberOfLocation).setItem(new Heal("apple", 4));
+                        break;
+                    case "Gate":
+                        hashMap.get(numberOfLocation).setNpc(new Npc("Watchman", 6, 2));
+                        break;
+                    case "Hallway":
+                        hashMap.get(numberOfLocation).setItem(new Weapon("dagger", 4));
+                        break;
+                    case "Guard":
+                        hashMap.get(numberOfLocation).setNpc(new Npc("Royal Guard", 12, 4));
+                        break;
+                    case "Armory":
+                        hashMap.get(numberOfLocation).setItem(new Weapon("sword", 6));
+                        break;
+                    case "Boss":
+                        hashMap.get(numberOfLocation).setNpc(new Npc("King", 20, 6));
+                        break;
+                }
             }
     }
 
     public int[] loadDirections(String line){
-
-        /*
-        String direction;
-        int temp;
-        int[] a = new int[4];
-        direction = String.valueOf(line.matches("([0-9]+\\,){3}[0-9]+"));
-        direction.replaceAll(",", "");
-
-        for (int i = 0; i < a.length;i++){
-            temp = direction.charAt(i);
-            a[i] = temp;
-        }
-        return a;
-
-         */
-
-
-
         Pattern pattern = Pattern.compile("([0-9]+,){3}[0-9]+");
         Matcher matcher = pattern.matcher(line);
         matcher.find();
-        String[] a_temp = matcher.group().split(",");
-        int[] a_cardinal_directions = new int[4];
-        for (int i = 0; i < a_temp.length; i++){
-            a_cardinal_directions[i] = Integer.parseInt(a_temp[i]);
+        String[] temp = matcher.group().split(",");
+        int[] directions = new int[4];
+        for (int i = 0; i < temp.length; i++){
+            directions[i] = Integer.parseInt(temp[i]);
         }
-        return a_cardinal_directions;
-
-
-
+        return directions;
     }
 
     public String loadName(String line){

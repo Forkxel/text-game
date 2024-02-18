@@ -2,6 +2,8 @@ public class Location {
 
     private int west, north, east, south;
     private String name;
+    private Npc npc;
+    private Item item;
 
     public Location(int west, int north, int east, int south, String name) {
         this.west = west;
@@ -31,14 +33,19 @@ public class Location {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "west=" + west +
-                ", north=" + north +
-                ", east=" + east +
-                ", south=" + south +
-                ", name='" + name + '\'' +
-                '}';
+    public Npc getNpc() {
+        return npc;
+    }
+
+    public void setNpc(Npc npc) {
+        this.npc = npc;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

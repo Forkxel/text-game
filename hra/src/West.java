@@ -8,7 +8,6 @@ public class West implements Command{
         this.player = player;
     }
 
-
     @Override
     public void command() {
         player.move(map, player.getLocation().getWest());

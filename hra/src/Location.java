@@ -48,4 +48,17 @@ public class Location {
     public void setItem(Item item) {
         this.item = item;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "west=" + west +
+                ", north=" + north +
+                ", east=" + east +
+                ", south=" + south +
+                ", name='" + name + '\'' +
+                ", npc=" + npc +
+                ", item=" + item +
+                '}';
+    }
 }

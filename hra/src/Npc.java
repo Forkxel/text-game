@@ -25,4 +25,13 @@ public class Npc {
     public int getDamage() {
         return damage;
     }
+
+    @Override
+    public String toString() {
+        return "Npc{" +
+                "name='" + name + '\'' +
+                ", currentHP=" + currentHP +
+                ", damage=" + damage +
+                '}';
+    }
 }

@@ -50,6 +50,16 @@ public class Map {
                 }
             }
     }
+    public String loadName(String line){
+        Pattern pattern = Pattern.compile("[A-Z]{1}[a-z]*");
+        Matcher matcher = pattern.matcher(line);
+        String nameOfLocation;
+
+        matcher.find();
+        nameOfLocation = matcher.group();
+
+        return nameOfLocation;
+    }
 
     public int[] loadDirections(String line){
         Pattern pattern = Pattern.compile("([0-9]+,){3}[0-9]+");
@@ -61,17 +71,6 @@ public class Map {
             directions[i] = Integer.parseInt(temp[i]);
         }
         return directions;
-    }
-
-    public String loadName(String line){
-        Pattern pattern = Pattern.compile("[A-Z]{1}[a-z]*");
-        Matcher matcher = pattern.matcher(line);
-        String nameOfLocation;
-
-        matcher.find();
-        nameOfLocation = matcher.group();
-
-        return nameOfLocation;
     }
 
     @Override
